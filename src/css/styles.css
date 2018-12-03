@@ -1,0 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+div {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Poiret One', cursive;
+	background: #47b2ff;
+}
+
