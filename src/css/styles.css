@@ -5,10 +5,71 @@
 
 div {
 	box-sizing: border-box;
+	border-style: none;
+}
+
+input {
+	font-family: 'Poiret One', cursive;
+	border-radius: 20px;
+	outline-style: none;
+	border-style: none;
 }
 
 body {
 	font-family: 'Poiret One', cursive;
-	background: #47b2ff;
+	background: #6ccfff;
+}
+.round_wrapper {
+	background-color: #3c3f41;
+	border-radius: 10px;
+	padding: 10px 10px;
+	display: flex;
+	width: 50vw;
+	margin: 20vh auto;
+	flex-direction: column;
 }
 
+
+.round_head {
+	color: white;
+}
+
+.round_text {
+	color: white;
+	margin-top: 10px;
+	margin-left: 10px;
+	font-size: 25px;
+}
+
+.round_answer {
+	margin-top: 10px;
+	height: 50px;
+	padding-left: 10px;
+	font-weight: bold;
+	font-size: 20px;
+	letter-spacing: 2px;
+}
+
+.round_send {
+	margin-top: 8px;
+	height: 40px;
+	background-color: inherit;
+	border: 1.7px solid white;
+	color: white;
+	opacity: 0.7;
+	font-weight: 400;
+	letter-spacing: 3px;
+	font-size: 18px;
+	transition: all 0.7s;
+}
+
+.button_action {
+	background-color: #ffc723;
+	border: none;
+	color: white;
+	opacity: 0.8;
+}
+
+.round_send:hover {
+	opacity: 1;
+}
