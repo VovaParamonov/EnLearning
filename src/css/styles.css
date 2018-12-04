@@ -3,6 +3,12 @@
   padding: 0;
 }
 
+html {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
 div {
 	box-sizing: border-box;
 	border-style: none;
@@ -17,7 +23,17 @@ input {
 
 body {
 	font-family: 'Poiret One', cursive;
-	background: #6ccfff;
+	background-color: #6ccfff;
+}
+
+header {
+	height: 10vh;
+	background-color: #629fcd;
+}
+
+footer {
+	height: 20vh;
+	background-color: #629fcd;
 }
 .round_wrapper {
 	background-color: #3c3f41;
@@ -72,4 +88,8 @@ body {
 
 .round_send:hover {
 	opacity: 1;
+}
+
+@media screen and (max-width: 1080px) {
+
 }

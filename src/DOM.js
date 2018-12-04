@@ -1,9 +1,12 @@
 ﻿import $ from "jquery";
-import {rounds_arr} from "./index";
+import {rounds_arr, translate} from "./rounds";
+
+
+nextStep(true);
 
 export function round_create(arr_round, round_id) {
 
-    $('body').html("<div class='round_wrapper'>" +
+    $('.section_main').html("<div class='round_wrapper'>" +
         "<h1 class='round_head'>"+ arr_round[0] +"</h1>" +
         "<p class='round_text'>"+ arr_round[1] +"</p>" +
         "<input id='answer' class='round_answer' type='text' placeholder='Введите ответ'>" +
@@ -28,7 +31,7 @@ export function round_create(arr_round, round_id) {
 
     });
     $('.round_send').on("click", function(){
-        let func = arr_round[2];
+        let func = translate(arr_round[2], round_id);
         func($('.round_answer').val(), round_id);
 
     });
