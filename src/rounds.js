@@ -2,12 +2,18 @@ import {nextStep} from "./DOM";
 
 function translate (answer, id) {
     let func = function (ans){
-        if (ans == answer) {
-            nextStep(true, id);
-        }
-        else {
-            nextStep(false, id);
-        }
+      let result = ans.toLowerCase();
+      let failCounter;
+      //-----Обработка введенного ответа---------
+      if (result.indexOf(" ") == result.length-1){
+        result = result.slice(0,-1);
+      }
+      if (result == answer) {
+          nextStep(true, id);
+      }
+      else {
+          nextStep(false, id);
+      }
     }
     return func;
 }
@@ -15,38 +21,73 @@ function translate (answer, id) {
 let rounds_arr = [
     [
         "Перевод",
-        "Hello.",
-        "Привет"
+        "As long as.",
+        "до тех пор пока",
     ],
     [
         "Перевод",
-        "Pink",
-        "Розовый"
+        "тo teach",
+        "учить"
     ],
     [
         "Перевод",
-        "Прыжок",
-        "Jump"
+        "Esantial",
+        "существенный"
     ],
     [
         "Перевод",
-        "Jump",
-        "Прыжок"
+        "To show",
+        "скрывать"
     ],
     [
         "Перевод",
-        "Bay",
-        "Пока"
+        "To that",
+        "чтобы"
     ],
     [
         "Перевод",
-        "Белый",
-        "White"
+        "To find",
+        "искать"
     ],
     [
         "Перевод",
-        "Blue",
-        "Голубой"
+        "To find out",
+        "выяснять"
+    ],
+    [
+        "Перевод",
+        "Other",
+        "другой"
+    ],
+    [
+        "Перевод",
+        "Early",
+        "рано"
+    ],
+    [
+        "Перевод",
+        "To think",
+        "думать"
+    ],
+    [
+        "Перевод",
+        "invention",
+        "изобретение"
+    ],
+    [
+        "Перевод",
+        "neccessary",
+        "нужный"
+    ],
+    [
+        "Перевод",
+        "Quite",
+        "вполне"
+    ],
+    [
+        "Перевод",
+        "To use",
+        "использовать"
     ],
 ];
 

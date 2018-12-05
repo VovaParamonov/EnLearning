@@ -2,17 +2,16 @@
 import {rounds_arr, translate} from "./rounds";
 
 
+//alert("Prverka ".indexOf(" ") == "Prverka ".length-1 );
 
+//--------------Переменные DOM-----------
 var $counter = $('.counter');
 
 
-
+//---------------Переменные----------------
 var value = parseInt($counter.attr('data-value'));
 
-
-
 export function round_create(arr_round, round_id) {
-
     $('.section_main').html("<div class='round_wrapper'>" +
         "<h1 class='round_head'>"+ arr_round[0] +"</h1>" +
         "<p class='round_text'>"+ arr_round[1] +"</p>" +
