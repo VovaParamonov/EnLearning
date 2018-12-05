@@ -2,14 +2,14 @@
 import {rounds_arr, translate} from "./rounds";
 
 
-nextStep(true);
 
 var $counter = $('.counter');
 
 
-var value = parseInt($counter.attr('data-val'));
 
-alert($counter.attr("data-val"));
+var value = parseInt($counter.attr('data-value'));
+
+
 
 export function round_create(arr_round, round_id) {
 
@@ -62,7 +62,8 @@ export function nextStep(bool, id = -1) {
     }
     $('.round_answer').val("");
     round_create(rounds_arr[r_id], r_id);
-    $('.counter').attr("data-val", value);
+    $counter.attr("data-value", value);
+    $counter.text(value);
 }
 /*
 arr_round[3] {
