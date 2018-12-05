@@ -4,9 +4,6 @@ import {rounds_arr, translate} from "./rounds";
 
 
 var $counter = $('.counter');
-
-
-
 var value = parseInt($counter.attr('data-value'));
 
 
