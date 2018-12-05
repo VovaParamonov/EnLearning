@@ -4,6 +4,13 @@ import {rounds_arr, translate} from "./rounds";
 
 nextStep(true);
 
+var $counter = $('.counter');
+
+
+var value = parseInt($counter.attr('data-val'));
+
+alert($counter.attr("data-val"));
+
 export function round_create(arr_round, round_id) {
 
     $('.section_main').html("<div class='round_wrapper'>" +
@@ -39,22 +46,23 @@ export function round_create(arr_round, round_id) {
  }
 
 export function nextStep(bool, id = -1) {
+
     if (bool) {
-        let r_id = parseInt(Math.random() * (rounds_arr.length - 0) + 0);
-        while(r_id == id){
-            r_id = parseInt(Math.random() * (rounds_arr.length - 0) + 0);
-        }
-        round_create(rounds_arr[r_id], r_id);
+        value = value + 1;
     }
     else {
-        $('.round_answer').val("");
-        alert("Ошибка");
-        let r_id = parseInt(Math.random() * (rounds_arr.length - 0) + 0);
-        while(r_id == id){
-            r_id = parseInt(Math.random() * (rounds_arr.length - 0) + 0);
+        if (value > 0) {
+            value--;
         }
-        round_create(rounds_arr[r_id], r_id);
+        alert("Ошибка");
     }
+    let r_id = parseInt(Math.random() * (rounds_arr.length - 0) + 0);
+    while(r_id == id){
+        r_id = parseInt(Math.random() * (rounds_arr.length - 0) + 0);
+    }
+    $('.round_answer').val("");
+    round_create(rounds_arr[r_id], r_id);
+    $('.counter').attr("data-val", value);
 }
 /*
 arr_round[3] {
