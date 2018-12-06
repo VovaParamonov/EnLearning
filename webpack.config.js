@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
-const BomPlugin = require('webpack-utf8-bom');
+//const BomPlugin = require('webpack-utf8-bom');
 
 module.exports = {
   mode: 'development',
@@ -22,8 +22,8 @@ module.exports = {
       title: 'Output Management',
       template: './src/EnLearning.html'
     }),
-    new webpack.HotModuleReplacementPlugin(),
-    new BomPlugin(true)
+    new webpack.HotModuleReplacementPlugin()/*,
+    new BomPlugin(true)*/
   ],
   module: {
      rules: [

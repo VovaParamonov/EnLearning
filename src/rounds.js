@@ -1,13 +1,36 @@
 import {nextStep} from "./DOM";
 
-function translate (answer, id) {
+function translate (true_answers, id) {
     let func = function (ans){
-        if (ans == answer) {
-            nextStep(true, id);
-        }
-        else {
-            nextStep(false, id);
-        }
+      let result = ans.toLowerCase();
+      let overlap;
+      let answer_arr = [];
+
+      //-----Обработка введенного ответа---------
+      while (result.indexOf("  ") != -1){
+          result = result.slice(0,result.indexOf("  ")) + result.slice(result.indexOf("  ")+1, result.length);
+      }
+      while (result.indexOf(",") != -1){
+          result = result.slice(0,result.indexOf(",")) + result.slice(result.indexOf(",")+1, result.length);
+      }
+      if (result.indexOf(" ") == result.length-1){
+          result = result.slice(0,-1);
+      }
+      if (true_answers.includes(",")){
+          answer_arr = true_answers.split(", ");
+      } else {
+          answer_arr[0] = true_answers;
+      }
+
+      overlap = answer_arr.some((item) => (item == result));
+
+      //------------------------------------------
+      if (overlap) {
+          nextStep(true, id);
+      }
+      else {
+          nextStep(false, id);
+      }
     }
     return func;
 }
@@ -15,38 +38,73 @@ function translate (answer, id) {
 let rounds_arr = [
     [
         "Перевод",
-        "Hello.",
-        "Привет"
+        "As long as.",
+        "до тех пор пока, до тех пор",
     ],
     [
         "Перевод",
-        "Pink",
-        "Розовый"
+        "тo teach",
+        "учить, преподавать"
     ],
     [
         "Перевод",
-        "Прыжок",
-        "Jump"
+        "Essential",
+        "существенный, необходимый"
     ],
     [
         "Перевод",
-        "Jump",
-        "Прыжок"
+        "To show",
+        "показывать, проявлять"
     ],
     [
         "Перевод",
-        "Bay",
-        "Пока"
+        "To that",
+        "чтобы, для того чтобы"
     ],
     [
         "Перевод",
-        "Белый",
-        "White"
+        "To find",
+        "Находить"
     ],
     [
         "Перевод",
-        "Blue",
-        "Голубой"
+        "To find out",
+        "выяснять"
+    ],
+    [
+        "Перевод",
+        "Other",
+        "другой"
+    ],
+    [
+        "Перевод",
+        "Early",
+        "рано"
+    ],
+    [
+        "Перевод",
+        "To think",
+        "думать"
+    ],
+    [
+        "Перевод",
+        "invention",
+        "изобретение"
+    ],
+    [
+        "Перевод",
+        "Neccessary",
+        "нужный, необходимый"
+    ],
+    [
+        "Перевод",
+        "Quite",
+        "вполне"
+    ],
+    [
+        "Перевод",
+        "To use",
+        "использовать"
     ],
 ];
 
