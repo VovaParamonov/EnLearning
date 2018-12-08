@@ -1,5 +1,5 @@
 ﻿import $ from "jquery";
-import {rounds_arr, translate} from "./rounds";
+import {translate} from "./rounds";
 
 
 //alert("Prverka ".indexOf(" ") == "Prverka ".length-1 );
@@ -10,9 +10,18 @@ var $counter = $('.counter');
 
 //---------------Переменные----------------
 
+var load = false //---true, когда идет загрузка---
+
 var value = parseInt($counter.attr('data-value'));
 
-export function round_create(arr_round, round_id) {
+
+
+
+
+//--------------Основные function-page ---------------------------
+
+//--------Создание страницы уровня--------------------------------
+export function round_create(round_arr ,arr_round, round_id) {
     $('.section_main').html("<div class='round_wrapper'>" +
         "<div class='round_wrapper_after'><p> Yes! </p></div>" +
         "<h1 class='round_head'>"+ arr_round[0] +"</h1>" +
@@ -36,19 +45,17 @@ export function round_create(arr_round, round_id) {
             $('.round_send').val("Пропустить");
             $('.round_send').attr('data-action', 'false');
         }
-
-
     });
     $('.round_send').on("click", function(){
-
-        let func = translate(arr_round[2], round_id);
-        func($('.round_answer').val(), round_id);
-
+        if (!load){
+            let func = translate(round_arr ,arr_round[2]);
+            func($('.round_answer').val(), round_id);
+            load = true;
+        }
     });
-
  }
-
-export function round(bool, id = -1) {
+//-----------Переход к след. раунду в уровне ---------
+export function nextStep(round_arr, bool, id = -1) {
 
     if (bool) {
         value = value + 1;
@@ -61,16 +68,23 @@ export function round(bool, id = -1) {
         $('.round_wrapper_before').css({"transform" : "translate(-10px, 135px)"});
 
     }
+
     setTimeout(function(){
-        let r_id = parseInt(Math.random() * (rounds_arr.length - 0) + 0);
+        let r_id = parseInt(Math.random() * (round_arr.length - 0) + 0);
         while(r_id == id){
-            r_id = parseInt(Math.random() * (rounds_arr.length - 0) + 0);
+            r_id = parseInt(Math.random() * (round_arr.length - 0) + 0);
         }
         $('.round_answer').val("");
-        round_create(rounds_arr[r_id], r_id);
+        round_create(round_arr ,round_arr[r_id], r_id);
         $counter.attr("data-value", value);
         $counter.text(value);
+        load = false;
     },1500);
+}
+
+//------------Вызов уровня-------------------
+export function level(round_arr) {
+    nextStep(round_arr, true);
 }
 /*
 arr_round[3] {

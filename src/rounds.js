@@ -1,7 +1,7 @@
-import {round} from "./DOM";
+import {nextStep, round} from "./DOM";
 
-function translate (true_answers, id) {
-    let func = function (ans){
+function translate (round_arr,true_answers) {
+    let func = function (ans, id){
       let result = ans.toLowerCase();
       let overlap;
       let answer_arr = [];
@@ -26,16 +26,50 @@ function translate (true_answers, id) {
 
       //------------------------------------------
       if (overlap) {
-          round(true, id);
+          nextStep(round_arr, true, id);
       }
       else {
-          round(false, id);
+          nextStep(round_arr, false, id);
       }
     }
     return func;
 }
 
-let rounds_arr = [
+
+let round_colors = [
+    [
+        "Перевод",
+            "Blue",
+            "голубой",
+        ],
+    [
+        "Перевод",
+        "White",
+        "белый"
+    ],
+    [
+        "Перевод",
+        "Black",
+        "черный, чёрный"
+    ],
+    [
+        "Перевод",
+        "Yellow",
+        "желтый, жёлтый",
+    ],
+    [
+        "Перевод",
+        "Green",
+        "зеленый, зелёный"
+    ],
+    [
+        "Перевод",
+        "Pink",
+        "розовый"
+    ]
+]
+
+let free_round = [
     [
         "Перевод",
         "As long as.",
@@ -45,6 +79,11 @@ let rounds_arr = [
         "Перевод",
         "тo teach",
         "учить, преподавать"
+    ],
+    [
+        "Перевод",
+        "привет",
+        "Hello"
     ],
     [
         "Перевод",
@@ -108,5 +147,7 @@ let rounds_arr = [
     ],
 ];
 
+let arr_rounds = [round_colors, free_round];
 
-export {rounds_arr, translate}
+
+export {arr_rounds, translate}
