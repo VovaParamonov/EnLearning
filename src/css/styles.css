@@ -41,8 +41,8 @@ footer {
 	position: relative;
 	background-color: #2b2b2b;
 	display: block;
-	width: 200px;
-	height:80%;
+	width: 150px;
+	height:70%;
 	border-radius: 50px;
 	left: 10%;
 	top: 50%;
@@ -53,9 +53,10 @@ footer {
 
 .userLevel__progress {
 	position: absolute;
-	width: 0%;
+	width: 75%;
 	height:  100%;
 	background-color: #5ffd0f;
+	box-shadow: 2px 2px 2px #5ffc0f,2px -2px 2px #5ffc0f ;
 }
 
 .userLevel__display {
@@ -63,12 +64,13 @@ footer {
 	position: relative;
 	top: 50%;
 	transform: translateY(-50%);
-	width: 150px;
+	width: 70%;
 	height: 50%;
-	padding-top: 5px;
+	padding-top: 2px;
 	margin: 0 auto;
-	border-radius: 40%;
+	border-radius: 50%;
 	box-shadow: 2px 3px 10px #2b2b2b, -2px -2px 10px #2b2b2b;
+	opacity: 0.9;
 }
 .userLevel__levelCounter {
 	font-weight: bold;
@@ -96,8 +98,8 @@ footer {
 }
 
 .section {
-	background-color: #74aecb;
-	height: 1000px;
+	background-color: #66bee6;
+	height: 100%;
 	width:70%;
 	margin: 0 auto;
 }
@@ -110,19 +112,29 @@ footer {
 .section_main {
 	display: flex;
 	flex-direction: column;
-	align-content: center;
+	align-items: center;
 }
 
 .level_card {
-	width: 40%;
-	height: 50px;
-	text-align: center;
+	width: 80%;
+	height: 100px;
+	padding-left: 30px;
 	color: white;
 	padding-top: 10px;
 	margin: 20px;
 	border-radius: 20px;
 	background-color: #2b2b2b;
 	cursor: pointer;
+	box-shadow: 2px 3px 10px #2b2b2b;
+	transition: all 0.8s;
+}
+.level_card:hover {
+	transform: translateX(20px);
+}
+
+.level_card p{
+	margin-top: 10px;
+	margin-left: 10px;
 }
 
 .section_rigth {
@@ -130,6 +142,9 @@ footer {
 }
 
 /*-----------Стили страницы Уровней----------*/
+.value {
+	margin-top: 10px;
+}
 .progressBar {
 	width: 70vw;
 	height: 2px;
@@ -154,7 +169,7 @@ footer {
 	padding: 10px 10px;
 	display: flex;
 	width: 50vw;
-	margin: 20vh auto;
+	margin: 100px auto;
 	flex-direction: column;
 	content: "Answer";
 
@@ -242,5 +257,16 @@ footer {
 }
 
 @media screen and (max-width: 1080px) {
+	header {
+		height: 100px;
+	}
+	.section_main {
+		background-color: inherit;
+	}
+	.round_wrapper {
+		margin-top: 50px;
+		width: 70vw;
+
+	}
 
 }

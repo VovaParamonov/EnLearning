@@ -74,21 +74,32 @@ export function nextStep(round_arr, bool, id = -1) {
         }
         $('.round_wrapper_before').css({"transform" : "translate(-10px, 135px)"});
     }
-    setTimeout(function(){
+    if (id == -1){
         let r_id = parseInt(Math.random() * (round_arr.length - 0) + 0);
-        while(r_id == id){
-            r_id = parseInt(Math.random() * (round_arr.length - 0) + 0);
-        }
         $('.round_answer').val("");
         level_create(round_arr ,round_arr[r_id], r_id);
         $counter.attr("data-value", value);
         $counter.text(value);
         $progressBar_elem.css({"width" : value*10 + "%"});
-        if (value == 10){
-            setTimeout(function(){main(arr_rounds);value = -1},500);
-        }
         load = false;
-    },1500);
+    } else {
+        setTimeout(function(){
+            let r_id = parseInt(Math.random() * (round_arr.length - 0) + 0);
+            while(r_id == id){
+                r_id = parseInt(Math.random() * (round_arr.length - 0) + 0);
+            }
+            $('.round_answer').val("");
+            level_create(round_arr ,round_arr[r_id], r_id);
+            $counter.attr("data-value", value);
+            $counter.text(value);
+            $progressBar_elem.css({"width" : value*10 + "%"});
+            if (value == 10){
+                setTimeout(function(){main(arr_rounds);value = -1},500);
+            }
+            load = false;
+        },1500);
+    }
+
 }
 //------------Вызов уровня-------------------
 export function level(round_arr) {
@@ -107,12 +118,11 @@ export function main(arr_levels){
     );
     $('header').append($userLevel);
     $('header').append("<div class='Logo'><span class='Logo__local'>local</span><span class='Logo__EnLearning'>EnLearning</span></div>");
-    arr_levels.forEach(function(item,id, arr){
-        $('.section_main').append("<div class='level_card' data-level_id='"+ id +"'><h2>"+parseInt(id+1)+"</h2></div>");
-    })
-
-    $('.level_card').click(function(eventObj){
-        level(arr_levels[$(this).attr("data-level_id")]);
+    arr_levels.forEach(function(item, id){
+        $('.section_main').append("<div class='level_card' data-name='"+item[0]+"' data-id='"+id+"'><h2>"+item[0]+"</h2><p>"+item[2]+"</p></div>");
+    });
+    $('.level_card').click(function(){
+        level(arr_levels[$(this).attr("data-id")][1]);
     })
 }
 

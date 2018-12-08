@@ -69,7 +69,7 @@ let round_colors = [
     ]
 ]
 
-let free_round = [
+let round_training = [
     [
         "Перевод",
         "As long as.",
@@ -147,7 +147,56 @@ let free_round = [
     ],
 ];
 
-let arr_rounds = [round_colors, free_round];
+let round_animals = [
+    [
+        "Перевод",
+        "Cat",
+        "кошка, кот"
+    ],
+    [
+        "Перевод",
+        "Crab",
+        "краб"
+    ],
+    [
+        "Перевод",
+        "Dog",
+        "собака"
+    ],
+    [
+        "Перевод",
+        "Wolf",
+        "волк"
+    ],
+    [
+        "Перевод",
+        "Cat",
+        "кошка, кот"
+    ],
+    [
+        "Перевод",
+        "Spider",
+        "паук"
+    ],
+    [
+        "Перевод",
+        "bird",
+        "птица, птичка"
+    ],
+    [
+        "Перевод",
+        "Bear",
+        "медведь"
+    ]
+]
 
+
+
+let arr_rounds = [
+    ['Colors', round_colors, "Изучение цветов: Blue, White, Yellow, Black, Green"],
+    ["Animals", round_animals, "Изучение животных: Car, Dog, Spider, Bear, Bird,Wolf, Crab"],
+    ['Training', round_training, "Уровень для тренинга. Переводы слов и словосочетаний разной направленности"]
+
+];
 
 export {arr_rounds, translate}
