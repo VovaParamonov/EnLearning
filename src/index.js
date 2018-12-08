@@ -1,4 +1,4 @@
-import {level} from "./DOM";
+import {level, main} from "./DOM";
 import './css/styles.css';
 import './DOM.js';
 import './funcs.js';
@@ -7,5 +7,5 @@ import {arr_rounds} from "./rounds";
 
 
 $(document).ready(function(){
-    level(arr_rounds[0]);
+    main(arr_rounds);
 });

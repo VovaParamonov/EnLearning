@@ -1,17 +1,17 @@
 ﻿import $ from "jquery";
-import {translate} from "./rounds";
+import {translate, arr_rounds} from "./rounds";
+
+//--------------Переменные DOM (Главной странцы)-----------
+var $userLevel = ("<div class='userLevel' data-val='0'><div class='userLevel__progress'></div><div class='userLevel__display' data-level='1'><p>level.</p><span class='userLevel__levelCounter'>1</span></div></div>");
 
 
-//alert("Prverka ".indexOf(" ") == "Prverka ".length-1 );
-
-//--------------Переменные DOM-----------
-var $counter = $('.counter');
 
 
-//---------------Переменные----------------
-
+//--------------Переменные DOM (Уровня)-----------
+var $counter = $("<span class='counter' data-value='-1'>0</span>");
+var $progressBar_elem = $("<div class='progressBar__elem'></div>");
+//---------------Переменные (уровня)----------------
 var load = false //---true, когда идет загрузка---
-
 var value = parseInt($counter.attr('data-value'));
 
 
@@ -21,8 +21,13 @@ var value = parseInt($counter.attr('data-value'));
 //--------------Основные function-page ---------------------------
 
 //--------Создание страницы уровня--------------------------------
-export function round_create(round_arr ,arr_round, round_id) {
-    $('.section_main').html("<div class='round_wrapper'>" +
+export function level_create(round_arr ,arr_round, round_id) {
+    $('body').html(
+        "<header>"+
+        "<h1 class='value'>Value: </h1>" +
+        "<div class='progressBar'></div>" +
+        "</header>" +
+        "<div class='round_wrapper'>" +
         "<div class='round_wrapper_after'><p> Yes! </p></div>" +
         "<h1 class='round_head'>"+ arr_round[0] +"</h1>" +
         "<p class='round_text'>"+ arr_round[1] +"</p>" +
@@ -31,6 +36,9 @@ export function round_create(round_arr ,arr_round, round_id) {
         "<div class='round_wrapper_before'><p>"+arr_round[2]+"</p></div>" +
         "</div>"
     );
+    $('.value').append($counter);
+    $('.progressBar').append($progressBar_elem);
+
     $('.round_answer').ready(function(){$('.round_answer').focus()})
     $('.round_answer').on("keyup", function(eventObj){
         if (eventObj.which == 13){
@@ -56,7 +64,6 @@ export function round_create(round_arr ,arr_round, round_id) {
  }
 //-----------Переход к след. раунду в уровне ---------
 export function nextStep(round_arr, bool, id = -1) {
-
     if (bool) {
         value = value + 1;
         $('.round_wrapper_after').css({"transform" : "translate(-10px, -50px)"})
@@ -66,26 +73,51 @@ export function nextStep(round_arr, bool, id = -1) {
             value--;
         }
         $('.round_wrapper_before').css({"transform" : "translate(-10px, 135px)"});
-
     }
-
     setTimeout(function(){
         let r_id = parseInt(Math.random() * (round_arr.length - 0) + 0);
         while(r_id == id){
             r_id = parseInt(Math.random() * (round_arr.length - 0) + 0);
         }
         $('.round_answer').val("");
-        round_create(round_arr ,round_arr[r_id], r_id);
+        level_create(round_arr ,round_arr[r_id], r_id);
         $counter.attr("data-value", value);
         $counter.text(value);
+        $progressBar_elem.css({"width" : value*10 + "%"});
+        if (value == 10){
+            setTimeout(function(){main(arr_rounds);value = -1},500);
+        }
         load = false;
     },1500);
 }
-
 //------------Вызов уровня-------------------
 export function level(round_arr) {
     nextStep(round_arr, true);
 }
+
+
+//----------------Создание главной страницы---------------
+export function main(arr_levels){
+    $('body').html(
+        "<header>"+
+        "</header>"+
+        /*"<div class='section section_left'></div>" +*/
+        "<div class='section section_main'></div>"/* +
+        "<div class='section section_right'></div>"*/
+    );
+    $('header').append($userLevel);
+    $('header').append("<div class='Logo'><span class='Logo__local'>local</span><span class='Logo__EnLearning'>EnLearning</span></div>");
+    arr_levels.forEach(function(item,id, arr){
+        $('.section_main').append("<div class='level_card' data-level_id='"+ id +"'><h2>"+parseInt(id+1)+"</h2></div>");
+    })
+
+    $('.level_card').click(function(eventObj){
+        level(arr_levels[$(this).attr("data-level_id")]);
+    })
+}
+
+
+
 /*
 arr_round[3] {
     name/id,
