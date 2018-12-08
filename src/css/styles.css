@@ -49,7 +49,7 @@ footer {
 
 }
 
-.round_wrapper::before {
+.round_wrapper_after {
 	padding-top: 5px;
 	content: "Answer";
 	border-radius: 10px;
@@ -64,13 +64,12 @@ footer {
 	z-index: -1;
 	width: inherit;
 	height: 100px;
-
+	transition: all 0.8s;
 }
 
-.round_wrapper::after {
-	padding-top: 50px;
+.round_wrapper_before {
+	padding-top: 55px;
 	padding-bottom: 0;
-	content: "Fail";
 	border-radius: 10px;
 	background-color: #e23225;
 	opacity: 0.6;
@@ -82,7 +81,8 @@ footer {
 	position: absolute;
 	z-index: -1;
 	width: inherit;
-	height: 35px;
+	height: 90px;
+	transition: all 0.5s;
 }
 
 

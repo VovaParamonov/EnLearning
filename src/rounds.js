@@ -1,4 +1,4 @@
-import {nextStep} from "./DOM";
+import {round} from "./DOM";
 
 function translate (true_answers, id) {
     let func = function (ans){
@@ -26,10 +26,10 @@ function translate (true_answers, id) {
 
       //------------------------------------------
       if (overlap) {
-          nextStep(true, id);
+          round(true, id);
       }
       else {
-          nextStep(false, id);
+          round(false, id);
       }
     }
     return func;
@@ -64,7 +64,7 @@ let rounds_arr = [
     [
         "Перевод",
         "To find",
-        "Находить"
+        "находить"
     ],
     [
         "Перевод",

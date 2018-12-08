@@ -14,10 +14,12 @@ var value = parseInt($counter.attr('data-value'));
 
 export function round_create(arr_round, round_id) {
     $('.section_main').html("<div class='round_wrapper'>" +
+        "<div class='round_wrapper_after'><p> Yes! </p></div>" +
         "<h1 class='round_head'>"+ arr_round[0] +"</h1>" +
         "<p class='round_text'>"+ arr_round[1] +"</p>" +
         "<input id='answer' class='round_answer' type='text' placeholder='Введите ответ'>" +
         "<input id='send' class='round_send' data-action='false' type='submit' value='Пропустить'>" +
+        "<div class='round_wrapper_before'><p>"+arr_round[2]+"</p></div>" +
         "</div>"
     );
     $('.round_answer').ready(function(){$('.round_answer').focus()})
@@ -38,7 +40,7 @@ export function round_create(arr_round, round_id) {
 
     });
     $('.round_send').on("click", function(){
-        //$(".round_wrapper").prev().css({"content":"'Yes!'"})
+
         let func = translate(arr_round[2], round_id);
         func($('.round_answer').val(), round_id);
 
@@ -46,25 +48,29 @@ export function round_create(arr_round, round_id) {
 
  }
 
-export function nextStep(bool, id = -1) {
+export function round(bool, id = -1) {
 
     if (bool) {
         value = value + 1;
+        $('.round_wrapper_after').css({"transform" : "translate(-10px, -50px)"})
     }
     else {
         if (value > 0) {
             value--;
         }
-        alert("Ошибка");
+        $('.round_wrapper_before').css({"transform" : "translate(-10px, 135px)"});
+
     }
-    let r_id = parseInt(Math.random() * (rounds_arr.length - 0) + 0);
-    while(r_id == id){
-        r_id = parseInt(Math.random() * (rounds_arr.length - 0) + 0);
-    }
-    $('.round_answer').val("");
-    round_create(rounds_arr[r_id], r_id);
-    $counter.attr("data-value", value);
-    $counter.text(value);
+    setTimeout(function(){
+        let r_id = parseInt(Math.random() * (rounds_arr.length - 0) + 0);
+        while(r_id == id){
+            r_id = parseInt(Math.random() * (rounds_arr.length - 0) + 0);
+        }
+        $('.round_answer').val("");
+        round_create(rounds_arr[r_id], r_id);
+        $counter.attr("data-value", value);
+        $counter.text(value);
+    },1500);
 }
 /*
 arr_round[3] {
