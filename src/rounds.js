@@ -83,7 +83,7 @@ let round_training = [
     [
         "Перевод",
         "привет",
-        "Hello"
+        "hello, hi, qwer"
     ],
     [
         "Перевод",

@@ -1,10 +1,12 @@
 ﻿import $ from "jquery";
 import {translate, arr_rounds} from "./rounds";
+import {wordList_arr} from "./BD";
 
 //--------------Переменные DOM (Главной странцы)-----------
-var $userLevel = ("<div class='userLevel' data-val='0'><div class='userLevel__progress'></div><div class='userLevel__display' data-level='1'><p>level.</p><span class='userLevel__levelCounter'>1</span></div></div>");
-
-
+var $userLevel = $("<div class='userLevel' data-val='0'><div class='userLevel__progress'></div><div class='userLevel__display' data-level='1'><p>level.</p><span class='userLevel__levelCounter'>1</span></div></div>");
+var $wordsListCard = $("<div class='wordListCard'></div>");
+var $backgroundBlock = $("<div class='BackgroundBlock'></div>");
+var $windowAdd = $("<div class='windowAdd'><h1>Добавить слово</h1><input class='windowAdd__word' placeholder='Новое слово'><input class='windowAdd__translate' placeholder='Перевод'><input type='submit' class='windowAdd__button' value='Добавить'></div>")
 
 
 //--------------Переменные DOM (Уровня)-----------
@@ -112,15 +114,58 @@ export function main(arr_levels){
     $('body').html(
         "<header>"+
         "</header>"+
-        /*"<div class='section section_left'></div>" +*/
-        "<div class='section section_main'></div>"/* +
-        "<div class='section section_right'></div>"*/
+        "<div class='section_main'>"+
+            /*"<div class='section section_left'></div>" +*/
+            "<div class='section section_middle'></div>" +
+            "<div class='section section_right'></div>" +
+        "</div>"
     );
     $('header').append($userLevel);
     $('header').append("<div class='Logo'><span class='Logo__local'>local</span><span class='Logo__EnLearning'>EnLearning</span></div>");
     arr_levels.forEach(function(item, id){
-        $('.section_main').append("<div class='level_card' data-name='"+item[0]+"' data-id='"+id+"'><h2>"+item[0]+"</h2><p>"+item[2]+"</p></div>");
+        $('.section_middle').append("<div class='level_card' data-name='"+item[0]+"' data-id='"+id+"'><h2>"+item[0]+"</h2><p>"+item[2]+"</p></div>");
     });
+    var $wordList = $("<ol class='wordListCard__list'></ol>");
+
+    function wordListCreate (arr_words) {
+        arr_words.forEach(function(item){
+            $wordList.append("<li class='wordList__item'>"+item[0]+" - "+item[1]+"</li>")
+        });
+        $wordsListCard.html("<h2>Words to learn</h2>");
+        $wordsListCard.append($wordList);
+        $wordsListCard.append("<input type='button' class='wordListCard__button' value='Добавить'>");
+        $('.section_right').append($wordsListCard);
+    }
+
+    wordListCreate(wordList_arr);
+
+
+
+
+    //-----------------------------Обработчики главной страницы------------------
+    $('.wordListCard').delegate(".wordListCard__button", "click", function(){
+        $backgroundBlock;
+        $('body').prepend($backgroundBlock).prepend($windowAdd);
+
+        $(".windowAdd__button").on("click", function(){
+            if ($(".windowAdd__word").val() != '' && $(".windowAdd__translate").val() != ''){
+                wordList_arr.push([$(".windowAdd__word").val(),$(".windowAdd__translate").val()]);
+                $(".windowAdd__word").val('');
+                $(".windowAdd__translate").val('');
+                $wordList.html('');
+                wordListCreate(wordList_arr);
+            }
+            $windowAdd.remove();
+            $backgroundBlock.remove();
+        });
+        $(".windowAdd").delegate('input', "keyup", function(eventObj){
+            if (eventObj.which == 13){
+                $('.windowAdd__button').click();
+            }
+        })
+    });
+
+
     $('.level_card').click(function(){
         level(arr_levels[$(this).attr("data-id")][1]);
     })

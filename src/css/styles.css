@@ -53,7 +53,7 @@ footer {
 
 .userLevel__progress {
 	position: absolute;
-	width: 75%;
+	width: 0%;
 	height:  100%;
 	background-color: #5ffd0f;
 	box-shadow: 2px 2px 2px #5ffc0f,2px -2px 2px #5ffc0f ;
@@ -97,28 +97,43 @@ footer {
 	width: 40px;
 }
 
+.section_main {
+	display: flex;
+	justify-content: space-between;
+}
+
 .section {
-	background-color: #66bee6;
+	/*background-color: #66bee6;*/
 	height: 100%;
 	width:70%;
 	margin: 0 auto;
+	height: 100vh;
 }
 
 .section_left {
-	background-color: #e23225;
+
+}
+
+.section_right {
+
+
 }
 
 
-.section_main {
+.section_middle {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	width: 200vw;
 }
 
 .level_card {
-	width: 80%;
+	z-index: 1;
+	overflow: hidden;
+	width: 90%;
 	height: 100px;
 	padding-left: 30px;
+	padding-right: 15px;
 	color: white;
 	padding-top: 10px;
 	margin: 20px;
@@ -128,18 +143,89 @@ footer {
 	box-shadow: 2px 3px 10px #2b2b2b;
 	transition: all 0.8s;
 }
+
 .level_card:hover {
 	transform: translateX(20px);
 }
+
 
 .level_card p{
 	margin-top: 10px;
 	margin-left: 10px;
 }
 
-.section_rigth {
-	background-color: aqua;
+
+.section_right {
+
 }
+
+.wordListCard {
+	padding: 5px;
+	background-color: #629ecc;
+	width: 90%;
+	margin: 20px auto;
+	border-radius: 5px;
+}
+.wordListCard h2 {
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+.wordListCard__list {
+	margin-left: 10px;
+	list-style: none;
+	line-height: 35px;
+}
+
+.wordListCard__button {
+	display: block;
+	width: 50%;
+	height: 25px;
+	margin: 10px auto;
+	cursor: pointer;
+}
+
+.BackgroundBlock	 {
+	z-index: 10;
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	background-color: #3C3F41;
+	opacity: 0.4;
+}
+
+.windowAdd {
+	text-align: center;
+	z-index: 11;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	display: flex;
+	height: 300px;
+	width: 450px;
+	background-color: #629fcd;
+	flex-direction: column;
+	justify-content: space-around;
+	padding: 50px;
+	border-radius: 10px;
+	box-shadow: 2px 2px 10px #2b2b2b;
+}
+
+.windowAdd h1 {
+	margin-top: -30px ;
+}
+
+.windowAdd input {
+	height: 30px;
+	padding-left: 10px;
+}
+
+.windowAdd__button {
+	padding: 0px;
+	cursor: pointer;
+}
+
 
 /*-----------Стили страницы Уровней----------*/
 .value {
@@ -258,7 +344,29 @@ footer {
 
 @media screen and (max-width: 1080px) {
 	header {
-		height: 100px;
+		height: 10vh;
+	}
+
+	.Logo {
+		top: 100px;
+	}
+
+	.Logo__local {
+		font-size: 25px;
+	}
+	.Logo__EnLearning {
+		font-size: 80px;
+	}
+	.userLevel {
+		left: 1.5%;
+		height: 60%;
+		width: 250px;
+		font-size: 35px;
+		font-weight: bold;
+
+	}
+	.userLevel span {
+		font-size: 50px;
 	}
 	.section_main {
 		background-color: inherit;
@@ -266,7 +374,43 @@ footer {
 	.round_wrapper {
 		margin-top: 50px;
 		width: 70vw;
+	}
+	.section_middle {
+		width: 60vw;
+	}
+	.wordListCard h2{
+		font-size: 60px;
+	}
+	.wordList__item {
+		line-height: 100px;
+		font-size: 45px;
 
 	}
+	.windowAdd {
+		width: 75%;
+		top: 20%;
+		height: 600px;
 
+	}
+	.windowAdd h1 {
+		font-size: 70px;
+	}
+	.windowAdd input {
+		height: 100px;
+		font-size: 50px;
+	}
+	.wordListCard__button {
+		width: 90%;
+		height: 90px;
+		font-size: 50px;
+	}
+	.level_card {
+		height: 260px;
+	}
+	.level_card h2 {
+		font-size: 60px;
+	}
+	.level_card p {
+		font-size: 30px;
+	}
 }
