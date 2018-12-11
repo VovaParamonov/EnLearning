@@ -1,9 +1,11 @@
 ﻿import $ from "jquery";
 import {translate, arr_rounds} from "./rounds";
-import {wordList_arr} from "./BD";
+import {wordList_arr,exp, lvl, DataSync} from "./BD";
+import {setCookie,getCookie} from "./Cookies";
+
 
 //--------------Переменные DOM (Главной странцы)-----------
-var $userLevel = $("<div class='userLevel' data-val='0'><div class='userLevel__progress'></div><div class='userLevel__display' data-level='1'><p>level.</p><span class='userLevel__levelCounter'>1</span></div></div>");
+var $userLevel = $("<div class='userLevel' data-level='1' data-exp='0'><div class='userLevel__progress'></div><div class='userLevel__display'><p>level.</p><span class='userLevel__levelCounter'>1</span></div></div>");
 var $wordsListCard = $("<div class='wordListCard'></div>");
 var $backgroundBlock = $("<div class='BackgroundBlock'></div>");
 var $windowAdd = $("<div class='windowAdd'><h1>Добавить слово</h1><input class='windowAdd__word' placeholder='Новое слово'><input class='windowAdd__translate' placeholder='Перевод'><input type='submit' class='windowAdd__button' value='Добавить'></div>")
@@ -15,6 +17,10 @@ var $progressBar_elem = $("<div class='progressBar__elem'></div>");
 //---------------Переменные (уровня)----------------
 var load = false //---true, когда идет загрузка---
 var value = parseInt($counter.attr('data-value'));
+
+
+
+
 
 
 
@@ -95,7 +101,8 @@ export function nextStep(round_arr, bool, id = -1) {
             $counter.attr("data-value", value);
             $counter.text(value);
             $progressBar_elem.css({"width" : value*10 + "%"});
-            if (value == 10){
+            if (value >= 10){
+                setCookie("exp",parseInt(exp)+25);
                 setTimeout(function(){main(arr_rounds);value = -1},500);
             }
             load = false;
@@ -136,7 +143,14 @@ export function main(arr_levels){
         $wordsListCard.append("<input type='button' class='wordListCard__button' value='Добавить'>");
         $('.section_right').append($wordsListCard);
     }
-
+    //--------------Синхронизация с cookies-------------------
+    DataSync();
+    //alert(exp + "  " + lvl )
+    $('.userLevel').attr("data-exp", exp);
+    $('.userLevel').attr("data-level", lvl);
+    $('.userLevel__levelCounter').text(lvl);
+    $('.userLevel__progress').css("width",exp+"%");
+    //=========================================================
     wordListCreate(wordList_arr);
 
 
@@ -154,6 +168,7 @@ export function main(arr_levels){
                 $(".windowAdd__translate").val('');
                 $wordList.html('');
                 wordListCreate(wordList_arr);
+                setCookie('wordList', JSON.stringify(wordList_arr));
             }
             $windowAdd.remove();
             $backgroundBlock.remove();
