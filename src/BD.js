@@ -1,23 +1,36 @@
 import {getCookie, setCookie} from "./Cookies";
-import $ from "jquery";
 
 var exp = 0;
 var lvl = 1;
 
 
 var wordList_arr = [
-    ["Слово", "Перевод"]
+
 ];
 
 
 function DataSync(){
-    if (getCookie("exp") || getCookie("exp") == 0){
+    //---------------------Сионхонизация с куки или их установка---------------
+    if (getCookie("exp") != "Fail"){
         exp = getCookie("exp");
         console.log(exp);
+    } else {
+        setCookie("exp", exp);
     }
-    lvl = getCookie("lvl");
-    wordList_arr = JSON.parse(getCookie("wordList"));
+    if (getCookie("lvl") != "Fail"){
+        lvl = getCookie("lvl");
+    } else {
+        setCookie("lvl", lvl);
+    }
+    if (getCookie("wordList") != "Fail"){
+        wordList_arr = JSON.parse(getCookie("wordList"));
+    } else {
+        setCookie("wordList",JSON.stringify(wordList_arr));
+    }
+    //=========================================================================
 
+
+    //------------------------------------Повышение уровня----------------------
     if (exp >= 100){
         alert("Поздравляю с переходом на новый уровень");
         setCookie("exp", 0);
